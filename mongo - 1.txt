@@ -1,0 +1,134 @@
+Program 1
+a. Illustration of Where Clause, AND, OR operations in MongoDB.
+Create a database Students and collection details in Mongo DB IDE.
+
+Add the following documents in the details collection in MongoDB IDE.
+{
+"rno" : 1,
+"name" : "Bhavana",
+"location": "Chennai"
+}
+
+{
+"rno" : 2,
+"name" : "Amit",
+"location": "Delhi"
+}
+
+{
+"rno" : 3,
+"email_id" : "a@gmail.com" ,
+"location":"Chennai"
+}
+
+{
+"rno" : 4,
+"name" : "Akash" ,
+"location":"Bangalore"
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+1. Where Clause in MongoDB: In MongoDB, the find() method is used to query
+documents from a collection. The find() method can accept a query document as a
+parameter which acts as a "WHERE" clause.
+Syntax: db.collection.find({ field: value })
+In Mongodb shell, execute the following code:
+> use Students
+> db.details.find()
+Output:
+
+//findOne to show only first record
+> db. details.findOne()
+
+Output:
+
+--------------------------------------------------------------------------------------------------------------------------2. AND Operation in MongoDB: MongoDB provides the $and operator to perform
+logical AND operation between multiple conditions in a query.
+Syntax: db.collection.find({ $and: [ { field1: value1 }, { field2: value2 } ] })
+>db.details.find({$and: [{"location": "Chennai"},{rno:1}] })
+Output:
+
+--------------------------------------------------------------------------------------------------------------------------3. OR Operation in MongoDB: Similarly, MongoDB provides the $or operator to
+perform logical OR operation between multiple conditions in a query.
+Syntax: db.collection.find({ $or: [ { field1: value1 }, { field2: value2 } ] })
+>db.details.find({$or: [{"location": "Chennai"}, {"location": "Delhi"}] })
+
+Output:
+
+---------------------------------------------------------------------------------------------------------------------------
+
+b. Execute the Commands of MongoDB and operations in MongoDB: Insert, Query,
+Update, Delete and Projection. (Note: use any collection).
+
+1. Insert Operation: Use the insertOne() method to insert a single document into a
+collection.
+Syntax: db.collection.insertOne({ field1: value1, field2: value2, field3: value3 })
+Every row/document can be different than other
+> db.details.insertOne({name:'Amar',rno:5},{name:’Ajay’,rno:10})
+Output:
+
+Verification Code:
+>db.details.find({name:'Amar',rno:5})
+
+>db.details.find({name:'Ajay',rno:10})
+
+--------------------------------------------------------------------------------> db.details.insert({rno:6, email_id:'d@gmail.com'})
+Output:
+
+Verification Code:
+>db.details.find({rno:6, email_id:'d@gmail.com'})
+
+-----------------------------------------------------------------------------------------------// To insert date use ISODate function
+> db.details.insert({rno:15, name:'Ravina', dob: ISODate("2019-09-14")})
+
+Verification Code:
+
+--------------------------------------------------------------------------------------------------------------//Insert multiple documents at once
+> db.details.insert([{rno:7,name:'a'},{rno:8,name:'b'},{rno:8,name:'c'}])
+Output:
+
+Verification Code:
+
+// to insert multiple values for one key using []
+>db.details.insert({rno:10,name:'Ankit',hobbies:['singing','cricket','swimming',
+'music'],age:21})
+
+Output:
+
+Verification Code:
+
+--------------------------------------------------------------------------------------------------2. Query Operation: Use the find() method to query documents from a collection.
+Syntax: db.collection.find({ field: value })
+>db.details.find({rno:1})
+Output:
+
+3.Delete Operation: Use the deleteOne() method to delete a single document from a
+collection.
+
+Syntax: db.collection.deleteOne({ field: value })
+>db.details.deleteOne({rno:1})
+Output:
+
+Verification Code:
+
+>db. details.deleteMany( { location: "Chennai" } )
+Output:
+
+Verification Code:
+
+Update Operation: Use the updateOne() method to update a single document in a
+collection.
+Syntax: db.collection.updateOne( { field: value }, { $set: { fieldToUpdate: newValue } })
+> db.details.updateOne({ rno: 2 }, {$set: { location: "Mysore" } })
+Output:
+
+Verification Code:
+
+-------------------------------------------------------------------------------------------------------------------4.Projection Operation: Use the second parameter of the find() method to specify which fields
+to include or exclude in the query result.
+Syntax: db.collection.find({}, { field1: 1, field2: 1, _id: 0 })
+// Find command to show only names without condition
+> db. details.find({},{name:1,_id:0})
+
+

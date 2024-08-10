@@ -1,0 +1,85 @@
+Program 2
+a. Develop a MongoDB query to select certain fields and ignore some fields of the
+documents from any collection.
+Syntax: db.collection.find({}, { field1: 1, field2: 1, _id: 0 })
+•
+
+db.collection.find({}) is used to retrieve all documents from the collection.
+
+•
+
+{ field1: 1, field2: 1, _id: 0 } specifies the projection document where:
+
+•
+
+field1: 1 and field2: 1 indicates that these fields will be included in the result.
+
+•
+
+_id: 0 indicates that the _id field will be excluded from the result.
+
+Create a database Students and collection details in Mongo DB IDE.
+
+Add the following documents in the details collection in MongoDB IDE.
+{
+"rno" : 1,
+"name" : "Bhavana",
+"location": "Chennai"
+}
+
+{
+"rno" : 2,
+"name" : "Amit",
+"location": "Delhi"
+}
+
+{
+"rno" : 3,
+"email_id" : "a@gmail.com" ,
+"location":"Chennai"
+}
+
+{
+"rno" : 4,
+"name" : "Akash" ,
+"location":"Bangalore"
+}
+
+{
+"rno" : 5,
+"name" : "Chaitra",
+"location": "Bangalore"
+}
+
+//Find command with condition with giving name field only to show
+> db. details.find({rno:5},{name:1})
+Output:
+
+//Find command with condition with giving name field only to show and _id to hide
+>db. details.find({rno:5},{name:1,_id:0})
+Output:
+
+// Find command to show only names without condition
+> db. details.find({},{name:1,_id:0})
+
+b. Develop a MongoDB query to display the first 5 documents from the results obtained
+in a. [use of limit and find]
+Limit Operation: Used to restrict the number of documents returned by a query. This is
+particularly useful when you're dealing with large datasets and you only need a subset of
+documents.
+Syntax: db.collection.find({}, { field1: 1, field2: 1, _id: 0 }).limit(5)
+•
+
+Limit (5) limits the number of documents returned to 5.
+
+•
+
+// Limit use to show only some records from starting- following command shows
+only first 2 records from collection
+> db. details.find().limit(2)
+Output:
+
+>db. details.find().limit(5)
+Output:
+
+

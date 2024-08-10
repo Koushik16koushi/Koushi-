@@ -1,0 +1,56 @@
+Program 10
+Develop an aggregation pipeline to illustrate Text search on Catalog data collection.
+Create a database TextDB and collection catalog in Mongo IDE.
+
+Add the following documents in the catalog collection in MongoDB Shell.
+{
+"name": "Apple iPhone 14",
+"description": "Latest model of iPhone with advanced features",
+"category": "Electronics"
+}
+
+{
+"name": "Samsung Galaxy S21",
+"description": "Newest Samsung smartphone with great camera",
+"category": "Electronics"
+}
+
+{
+"name": "Sony Headphones",
+"description": "Noise-cancelling headphones for immersive sound",
+"category": "Audio"
+}
+
+In MongoShell
+>use TextDB
+
+Create a Text Index
+First, create a text index on the ‘name’ and ‘description’ fields.
+
+db.catalog.createIndex({ name: "text", description: "text" });
+Output:
+
+Define the Aggregation Pipeline
+Now, create an aggregation pipeline to perform the text search and process the results. Below
+is an example pipeline:
+db.catalog.aggregate([
+// Stage 1: Match documents containing the search term
+{
+$match: {
+$text: { $search: " Apple iPhone 14" }
+}
+},
+// Stage 2: Project only required fields
+{
+$project: {
+_id: 0,
+name: 1,
+description: 1,
+category: 1
+// Add more fields as needed
+}
+}
+])
+Output:
+
+
